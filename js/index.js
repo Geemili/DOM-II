@@ -1,5 +1,7 @@
 // Your code goes here
 
+let shouldWiggle = false;
+
 function main() {
     document.querySelectorAll("img").forEach(img => {
         img.addEventListener("mouseenter", event => {
@@ -26,6 +28,8 @@ function main() {
             Array.from(cloned.children).forEach(setupDestinationEl);
 
             document.querySelector(".container.home").appendChild(cloned);
+        } else if (event.key == "w") {
+            shouldWiggle = !shouldWiggle;
         }
     });
 
@@ -34,6 +38,17 @@ function main() {
         const fontSizeStr = window.getComputedStyle(event.target).fontSize;
         const fontSize = parseFloat(fontSizeStr);
         event.target.style.fontSize = (fontSize - event.deltaY).toString() + "px";
+    });
+
+    // Make everything wiggle underneath the mouse
+    document.querySelector("body").addEventListener("mousemove", event => {
+        if (shouldWiggle) {
+            const x = Math.floor(Math.random() * 3);
+            const y = Math.floor(Math.random() * 3);
+            event.target.style.left = `${x}px`;
+            event.target.style.top = `${y}px`;
+            event.target.style.position = `relative`;
+        }
     });
 }
 
