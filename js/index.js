@@ -63,6 +63,7 @@ function setupDestinationEl(el) {
 
     el.addEventListener("dblclick", ev => {
         el.remove();
+        ev.stopPropagation();
     });
 }
 
@@ -87,6 +88,16 @@ function setupContentPickEl(contentPick) {
         ev.target.appendChild(draggedEl);
     });
 
+    contentPick.addEventListener("dblclick", ev => {
+        const newDestination = document.createElement("div");
+
+        const newH4 = document.createElement("h4");
+        newH4.textContent = "Destination Paradise";
+        newDestination.appendChild(newH4);
+
+        setupDestinationEl(newDestination);
+        contentPick.appendChild(newDestination);
+    });
 }
 
 window.onload = main;
