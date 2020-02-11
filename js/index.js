@@ -40,19 +40,15 @@ function main() {
 let nextDestId = 0;
 function setupDestinationEl(el) {
     el.setAttribute("draggable", true);
-    const uniqClass = `${el.parentElement.id}-dest-${nextDestId++}`;
-    el.classList.add(uniqClass);
+    el.id = `dest-${nextDestId++}`;
     el.addEventListener("dragstart", ev => {
-        const uniqRef = `.${uniqClass}`;
-        ev.dataTransfer.setData("application/fun-bus", uniqRef);
+        ev.dataTransfer.setData("application/fun-bus", ev.target.id);
         ev.dataTransfer.dropEffect = "move";
     });
 }
 
-let contentPickNextId = 0;
 
 function setupContentPickEl(contentPick) {
-    contentPick.id = "content-pick-" + contentPickNextId++;
     contentPick.addEventListener("dragover", ev => {
         if (ev.currentTarget != ev.target) return;
         ev.preventDefault();
@@ -67,9 +63,8 @@ function setupContentPickEl(contentPick) {
         if (ev.currentTarget != ev.target) return;
         ev.target.style.removeProperty("background-color");
 
-        const draggedElRef = ev.dataTransfer.getData("application/fun-bus");
-        console.log(draggedElRef);
-        const draggedEl = document.querySelector(draggedElRef);
+        const draggedElId = ev.dataTransfer.getData("application/fun-bus");
+        const draggedEl = document.getElementById(draggedElId);
         ev.target.appendChild(draggedEl);
     });
 
