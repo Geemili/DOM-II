@@ -4,8 +4,17 @@ function main() {
 
     mainContainer.addEventListener("click", ev => {
         if (ev.target.classList.contains("block")) {
-            ev.target.remove();
-            mainContainer.prepend(ev.target);
+            let topRect = mainContainer.children[0].getBoundingClientRect();
+            let elRect = ev.target.getBoundingClientRect();
+            let tl = gsap.timeline();
+            tl.to(ev.target, {
+                duration: 1,
+                y: topRect.top - elRect.top,
+                onComplete: function() {
+                    ev.target.remove();
+                    mainContainer.prepend(ev.target);
+                },
+            }).to(ev.target, {duration: 0, y: 9});
         }
     });
 
