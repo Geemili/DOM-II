@@ -17,6 +17,13 @@ function main() {
             document.querySelector(".container.home").appendChild(cloned);
         }
     });
+
+    document.querySelector(".intro h2").addEventListener("wheel", event => {
+        event.preventDefault();
+        const fontSizeStr = window.getComputedStyle(event.target).fontSize;
+        const fontSize = parseFloat(fontSizeStr);
+        event.target.style.fontSize = (fontSize - event.deltaY).toString() + "px";
+    });
 }
 
 window.onload = main;
