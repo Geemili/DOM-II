@@ -1,5 +1,6 @@
 // Your code goes here
 
+
 function main() {
     document.querySelectorAll("img").forEach(img => {
         img.addEventListener("mouseenter", event => {
@@ -16,6 +17,15 @@ function main() {
             const cloned = pickNode.cloneNode(true);
             document.querySelector(".container.home").appendChild(cloned);
         }
+    });
+
+    document.querySelectorAll(".content-pick .destination").forEach(el => {
+        el.setAttribute("draggable", true);
+        el.addEventListener("dragstart", ev => {
+            ev.dataTransfer.setData("application/fun-bus", ev.target.id);
+            console.log(ev.target.id);
+            ev.dataTransfer.dropEffect = "move";
+        });
     });
 
     document.querySelector(".intro h2").addEventListener("wheel", event => {
