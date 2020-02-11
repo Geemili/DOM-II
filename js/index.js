@@ -45,6 +45,10 @@ function setupDestinationEl(el) {
         ev.dataTransfer.setData("application/fun-bus", ev.target.id);
         ev.dataTransfer.dropEffect = "move";
     });
+
+    el.addEventListener("dblclick", ev => {
+        el.remove();
+    });
 }
 
 
