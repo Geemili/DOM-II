@@ -9,6 +9,14 @@ function main() {
             event.target.style.opacity = "1.0";
         });
     });
+
+    document.addEventListener("keydown", event => {
+        if (event.key == "n") {
+            const pickNode = document.querySelector(".content-pick");
+            const cloned = pickNode.cloneNode(true);
+            document.querySelector(".container.home").appendChild(cloned);
+        }
+    });
 }
 
 window.onload = main;
