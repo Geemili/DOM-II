@@ -12,6 +12,10 @@ function main() {
         });
     });
 
+    document.querySelectorAll(".nav-link").forEach(el => {
+        el.addEventListener("click", ev => ev.preventDefault());
+    });
+
     // Set up content pick as a drop target
     setupContentPickEl(document.querySelector(".content-pick"));
 
